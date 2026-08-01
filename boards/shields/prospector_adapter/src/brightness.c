@@ -85,7 +85,8 @@ extern void als_thread(void *d0, void *d1, void *d2) {
     struct sensor_value intensity;
     uint8_t mapped_brightness;
 
-    dev = DEVICE_DT_GET_ONE(avago_apds9960);
+    // dev = DEVICE_DT_GET_ONE(avago_apds9960);
+    dev = DEVICE_DT_GET_ONE(ams_tsl2591);
     if (!device_is_ready(dev)) {
         printk("sensor: device not ready.\n");
     }
@@ -105,10 +106,10 @@ extern void als_thread(void *d0, void *d1, void *d2) {
             LOG_ERR("Cannot read ALS data.\n");
         }
 
-        // LOG_INF("ambient light intensity %d", intensity.val1);
+        printk("ambient light intensity %d", intensity.val1);
 
         mapped_brightness = map_light_to_pwm(intensity.val1);
-        // LOG_INF("NORMAL: mapped PWM duty cycle %d\n", mapped_brightness);
+        printk("NORMAL: mapped PWM duty cycle %d\n", mapped_brightness);
 
         if (abs(mapped_brightness - current_brightness) > FADE_THRESHOLD) {
             uint8_t integrator = 0;

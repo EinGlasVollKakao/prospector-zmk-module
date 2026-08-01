@@ -93,11 +93,17 @@ disp_spi: &spi3 {
 &i2c1 {
    status = "okay";
 
-   apds9960: apds9960@39 {
-       compatible = "avago,apds9960";
-       status = "okay";
-       reg = <0x39>;
-       int-gpios = <&xiao_d 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+   // apds9960: apds9960@39 {
+   //     compatible = "avago,apds9960";
+   //     status = "okay";
+   //     reg = <0x39>;
+   //     int-gpios = <&xiao_d 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+   // };
+   tsl2591: tsl2591@29 {
+       compatible = "ams,tsl2591";
+	   status = "okay";
+	   reg = <0x29>;
+	   int-gpios = <&xiao_d 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
    };
 };
 
